@@ -1,18 +1,21 @@
 'use client'
 
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 import { TodoItem } from './todoItem';
 import React, { useState } from 'react';
+import { Router } from 'next/router';
 
 export default function ToDo() {
   const [toDoListItems, setToDoListItems] = useState([
-    new TodoItem("test1", "Description", "Time to complete", new Date()),
-    new TodoItem("test2", "Description", "Time to complete", new Date()),
-    new TodoItem("test3", "Description", "Time to complete", new Date()),
+    new TodoItem("New Task", "Description", "Time to complete", new Date()),
+    new TodoItem("New Task", "Description", "Time to complete", new Date()),
+    new TodoItem("New Task", "Description", "Time to complete", new Date()),
   ]);
 
   const addToDoListItem = () => {
     // Create a new TodoItem with default values
-    const newItem = new TodoItem("New Task", "Description of new task", "Time to complete", new Date());
+    const newItem = new TodoItem("New Task", "Description", "Time to complete", new Date());
     setToDoListItems([...toDoListItems, newItem]);
   };
 
@@ -54,8 +57,8 @@ export default function ToDo() {
   return (
     <div className="bg-gradient-to-r from-blue-500 to-purple-600 min-h-screen p-8">
       <div className="max-w-5/6 mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6">
-        <header className="text-purple-700 text-3xl font-bold text-center mb-4">To Do List</header>
-        <p className="text-gray-600 text-center mb-6">This is the To-Do List Page.</p>
+        <header className="text-purple-700 text-3xl font-bold text-center mb-4">To-Do List</header>
+        <p className="text-gray-600 text-center mb-6">Add your to-do list here</p>
         <div className="flex items-center justify-between font-semibold text-gray-700 mb-2">
           <div className="w-60">Title</div>
           <div className="w-108">Description</div>
@@ -86,11 +89,14 @@ export default function ToDo() {
                 onChange={(e) => handleEdit(index, "time", e.target.value)}
                 className="w-50 mr-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              <input
-                type="text"
-                value={ToDoItem.getFormattedDueDate()}
-                onChange={(e) => handleEdit(index, "dueDate", e.target.value)}
-                className="w-50 mr-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              <DatePicker
+                selected={ToDoItem.dueDate}
+                onChange={(date) => handleEdit(index, "dueDate", date)}
+                showTimeSelect
+                timeFormat="HH:mm"
+                timeIntervals={15}
+                dateFormat="MMMM d, yyyy h:mm aa"
+                className="w-50 mr-2 p-2 border border-gray-300 rounded"
               />
               <button
                 onClick={() => removeItem(index)}
