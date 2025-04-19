@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { TodoItem } from './todoItem';
 import React, { useState } from 'react';
 import { Router } from 'next/router';
+import Footer from '../footer';
 
 export default function ToDo() {
   const [toDoListItems, setToDoListItems] = useState([
@@ -55,16 +56,16 @@ export default function ToDo() {
   }
 
   return (
-    <div className="bg-gradient-to-r from-blue-500 to-purple-600 min-h-screen p-8">
-      <div className="max-w-5/6 mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6">
-        <header className="text-purple-700 text-3xl font-bold text-center mb-4">To-Do List</header>
-        <p className="text-gray-600 text-center mb-6">Add your to-do list here</p>
+    <div className='items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]'>
+      <div className="max-w-screen-xl mx-auto bg-white rounded-xl shadow-md overflow-hidden p-8">
+        <header className="font-[family-name:var(--font-geist-mono)] text-5xl bold leading-tight text-center">To-Do List</header>
+        <p className="font-[family-name:var(--font-geist-mono)] bold leading-tight text-center mb-6">Add your to-do list here</p>
         <div className="flex items-center justify-between font-semibold text-gray-700 mb-2">
-          <div className="w-60">Title</div>
-          <div className="w-108">Description</div>
-          <div className="w-52">Time to Complete</div>
-          <div className="w-50">Due Date</div>
-          <div className="w-22 text-center">Actions</div>
+          <div className="w-58">Title</div>
+          <div className="w-106">Description</div>
+          <div className="w-50">Time to Complete</div>
+          <div className="w-48">Due Date</div>
+          <div className="w-20 text-center">Actions</div>
         </div>
         <ol className="space-y-4 mb-6">
           {toDoListItems.map((ToDoItem, index) => (
@@ -74,14 +75,14 @@ export default function ToDo() {
                 value={ToDoItem.title}
                 onChange={(e) => handleEdit(index, "title", e.target.value)}
                 placeholder='Title'
-                className="w-60 mr-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-58 mr-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <input
                 type="text"
                 value={ToDoItem.description}
                 onChange={(e) => handleEdit(index, "description", e.target.value)}
                 placeholder='Description'
-                className="w-110 mr-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-108 mr-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <input
                 type="text"
@@ -122,6 +123,7 @@ export default function ToDo() {
             Print items to console
           </button>
         </div>
+        <Footer />
       </div>
     </div>
   );
