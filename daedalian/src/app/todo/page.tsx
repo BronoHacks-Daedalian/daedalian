@@ -5,14 +5,14 @@ import React, { useState } from 'react';
 
 export default function ToDo() {
   const [toDoListItems, setToDoListItems] = useState([
-    new TodoItem("test1", "CS 4750 project"),
-    new TodoItem("test2", "CS 3800 Homework 2"),
-    new TodoItem("test3", "MAT 3100 Proof showcase"),
+    new TodoItem("test1", "CS 4750 project", "Time to complete", new Date()),
+    new TodoItem("test2", "CS 3800 Homework 2", "Time to complete", new Date()),
+    new TodoItem("test3", "MAT 3100 Proof showcase", "Time to complete", new Date()),
   ]);
 
   const addToDoListItem = () => {
     // Create a new TodoItem with default values
-    const newItem = new TodoItem("New Task", "Description of new task");
+    const newItem = new TodoItem("New Task", "Description of new task", "Time to complete", new Date());
     setToDoListItems([...toDoListItems, newItem]);
   };
 
@@ -20,17 +20,29 @@ export default function ToDo() {
     setToDoListItems(toDoListItems.filter((_, index) => index !== indexToRemove));
   };
 
-  function handleEdit(index: number, field: keyof TodoItem, value: string) {
+  function handleEdit(index: number, field: keyof TodoItem, value: any) {
     const updatedItems = [...toDoListItems];
     const item = updatedItems[index];
 
-    if (field == "title") {
-      item.title = value;
-    } else if (field == "description") {
-      item.description = value;
+    switch (field) {
+      case "title":
+        item.title = value;
+        break;
+      case "description":
+        item.description = value;
+        break;
+      case "time":
+        item.time = value;
+        break;
+      case "dueDate":
+        item.dueDate = value;
+        break;
+      default:
+        break;
     }
 
     setToDoListItems(updatedItems);
+
   }
 
   function printItems() {
@@ -57,6 +69,18 @@ export default function ToDo() {
               <input
                 type="text"
                 value={ToDoItem.description}
+                onChange={(e) => handleEdit(index, "description", e.target.value)}
+                className="flex-grow mr-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <input
+                type="text"
+                value={ToDoItem.time}
+                onChange={(e) => handleEdit(index, "description", e.target.value)}
+                className="flex-grow mr-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <input
+                type="text"
+                value={ToDoItem.getDueDate()}
                 onChange={(e) => handleEdit(index, "description", e.target.value)}
                 className="flex-grow mr-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
