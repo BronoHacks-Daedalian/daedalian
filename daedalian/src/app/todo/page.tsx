@@ -9,14 +9,14 @@ import Footer from '../footer';
 
 export default function ToDo() {
   const [toDoListItems, setToDoListItems] = useState([
-    new TodoItem("New Task", "Description", "Time to complete", new Date()),
-    new TodoItem("New Task", "Description", "Time to complete", new Date()),
-    new TodoItem("New Task", "Description", "Time to complete", new Date()),
+    new TodoItem("", "", "", null),
+    new TodoItem("", "", "", null),
+    new TodoItem("", "", "", null),
   ]);
 
   const addToDoListItem = () => {
     // Create a new TodoItem with default values
-    const newItem = new TodoItem("New Task", "Description", "Time to complete", new Date());
+    const newItem = new TodoItem("", "", "", null);
     setToDoListItems([...toDoListItems, newItem]);
   };
 
@@ -74,7 +74,7 @@ export default function ToDo() {
                 type="text"
                 value={ToDoItem.title}
                 onChange={(e) => handleEdit(index, "title", e.target.value)}
-                placeholder='Title'
+                placeholder='New Task'
                 className="w-58 mr-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <input
@@ -88,6 +88,7 @@ export default function ToDo() {
                 type="text"
                 value={ToDoItem.time}
                 onChange={(e) => handleEdit(index, "time", e.target.value)}
+                placeholder='Time to complete'
                 className="w-50 mr-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <DatePicker

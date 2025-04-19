@@ -3,7 +3,7 @@ export class TodoItem {
         public title: string,
         public description: string,
         public time: string,
-        public dueDate: Date
+        public dueDate: Date | null
     ) { }
 
     getSummary() {
@@ -11,6 +11,10 @@ export class TodoItem {
     }
 
     getFormattedDueDate() {
+        if (!this.dueDate) {
+            return "Not set";
+        }
+
         return this.dueDate.toLocaleString('en-US', {
             weekday: 'short',
             month: 'long',
