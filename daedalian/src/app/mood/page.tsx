@@ -14,13 +14,21 @@ export default function Mood() {
   return (
     <div className='mood-page'>
       <h1>Mood Tracker</h1>
-      <p>Welcome to the mood tracker.</p>
+      <p>How are you feeling today?</p>
 
       
       <div className="mood-btn-container">
         <MoodButton
           moodText="Good"
           moodValue={1}
+        ></MoodButton>
+        <MoodButton
+          moodText="Okay"
+          moodValue={2}
+        ></MoodButton>
+        <MoodButton
+          moodText="Bad"
+          moodValue={3}
         ></MoodButton>
       </div>
       
