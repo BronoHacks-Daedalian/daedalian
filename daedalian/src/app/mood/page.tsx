@@ -1,5 +1,6 @@
 'use client'
- 
+
+import Footer from "../footer";
 import MoodButton from "../components/MoodButton";
 
 import "./mood.css"; 
