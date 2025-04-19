@@ -5,9 +5,9 @@ import React, { useState } from 'react';
 
 export default function ToDo() {
   const [toDoListItems, setToDoListItems] = useState([
-    new TodoItem("test1", "CS 4750 project", "Time to complete", new Date(2025, 4, 19, 12, 0)),
-    new TodoItem("test2", "CS 3800 Homework 2", "Time to complete", new Date()),
-    new TodoItem("test3", "MAT 3100 Proof showcase", "Time to complete", new Date()),
+    new TodoItem("test1", "Description", "Time to complete", new Date()),
+    new TodoItem("test2", "Description", "Time to complete", new Date()),
+    new TodoItem("test3", "Description", "Time to complete", new Date()),
   ]);
 
   const addToDoListItem = () => {
@@ -56,7 +56,13 @@ export default function ToDo() {
       <div className="max-w-5/6 mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6">
         <header className="text-purple-700 text-3xl font-bold text-center mb-4">To Do List</header>
         <p className="text-gray-600 text-center mb-6">This is the To-Do List Page.</p>
-
+        <div className="flex items-center justify-between font-semibold text-gray-700 mb-2">
+          <div className="w-60">Title</div>
+          <div className="w-108">Description</div>
+          <div className="w-52">Time to Complete</div>
+          <div className="w-50">Due Date</div>
+          <div className="w-22 text-center">Actions</div>
+        </div>
         <ol className="space-y-4 mb-6">
           {toDoListItems.map((ToDoItem, index) => (
             <li className="flex items-center justify-between" key={index}>
@@ -64,25 +70,27 @@ export default function ToDo() {
                 type="text"
                 value={ToDoItem.title}
                 onChange={(e) => handleEdit(index, "title", e.target.value)}
-                className="w-48 mr-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder='Title'
+                className="w-60 mr-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <input
                 type="text"
                 value={ToDoItem.description}
                 onChange={(e) => handleEdit(index, "description", e.target.value)}
-                className="flex-grow mr-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder='Description'
+                className="w-110 mr-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <input
                 type="text"
                 value={ToDoItem.time}
-                onChange={(e) => handleEdit(index, "description", e.target.value)}
-                className="flex-grow mr-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                onChange={(e) => handleEdit(index, "time", e.target.value)}
+                className="w-50 mr-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <input
                 type="text"
                 value={ToDoItem.getFormattedDueDate()}
-                onChange={(e) => handleEdit(index, "description", e.target.value)}
-                className="flex-grow mr-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                onChange={(e) => handleEdit(index, "dueDate", e.target.value)}
+                className="w-50 mr-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <button
                 onClick={() => removeItem(index)}
