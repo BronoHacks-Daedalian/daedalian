@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 
 export default function ToDo() {
   const [toDoListItems, setToDoListItems] = useState([
-    new TodoItem("test1", "CS 4750 project", "Time to complete", new Date()),
+    new TodoItem("test1", "CS 4750 project", "Time to complete", new Date(2025, 4, 19, 12, 0)),
     new TodoItem("test2", "CS 3800 Homework 2", "Time to complete", new Date()),
     new TodoItem("test3", "MAT 3100 Proof showcase", "Time to complete", new Date()),
   ]);
@@ -80,7 +80,7 @@ export default function ToDo() {
               />
               <input
                 type="text"
-                value={ToDoItem.getDueDate()}
+                value={ToDoItem.getFormattedDueDate()}
                 onChange={(e) => handleEdit(index, "description", e.target.value)}
                 className="flex-grow mr-2 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               />

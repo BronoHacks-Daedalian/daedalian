@@ -7,10 +7,17 @@ export class TodoItem {
     ) { }
 
     getSummary() {
-        return `${this.title}: ${this.description}, due: ${this.dueDate}, total time to complete: ${this.time}`
+        return `${this.title}: ${this.description}, due: ${this.getFormattedDueDate()}, total time to complete: ${this.time}`
     }
 
-    getDueDate() {
-        return `temp`
+    getFormattedDueDate() {
+        return this.dueDate.toLocaleString('en-US', {
+            weekday: 'short',
+            month: 'long',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: '2-digit',
+            hour12: true
+        });
     }
 }
