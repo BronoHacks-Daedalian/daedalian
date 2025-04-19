@@ -120,7 +120,7 @@ export default function ToDo() {
             onClick={printItems}
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
           >
-            Print items to console
+            Generate
           </button>
         </div>
         <Footer />
