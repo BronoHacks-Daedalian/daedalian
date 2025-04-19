@@ -32,6 +32,7 @@ export default function Mood() {
         ></MoodButton>
       </div>
       
+        <Footer />
     </div>
   )
 }
