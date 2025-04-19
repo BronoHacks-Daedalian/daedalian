@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import { Router } from 'next/router';
 import Footer from '../footer';
 
+
 export default function ToDo() {
   const [toDoListItems, setToDoListItems] = useState([
     new TodoItem("", "", "", null),
@@ -22,6 +23,39 @@ export default function ToDo() {
 
   const removeItem = (indexToRemove: number) => {
     setToDoListItems(toDoListItems.filter((_, index) => index !== indexToRemove));
+  };
+
+  const downloadTodoList = async () => {
+    try {
+      const response = await fetch('/api/downloadTodoList', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ items: toDoListItems }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error');
+      }
+
+      const blob = await response.blob();
+
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'todo-list.txt';
+
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      window.URL.revokeObjectURL(url);
+
+    } catch (error) {
+      console.error('Error downloading file:', error);
+    }
   };
 
   function handleEdit(index: number, field: keyof TodoItem, value: any) {
@@ -47,12 +81,6 @@ export default function ToDo() {
 
     setToDoListItems(updatedItems);
 
-  }
-
-  function printItems() {
-    toDoListItems.map((item) => (
-      console.log(item.getSummary())
-    ))
   }
 
   return (
@@ -118,7 +146,7 @@ export default function ToDo() {
             Add a new to-do
           </button>
           <button
-            onClick={printItems}
+            onClick={downloadTodoList}
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
           >
             Generate
